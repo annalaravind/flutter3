@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_project/components/comp1container.dart';
-import 'package:flutter_todo_project/components/dialog_1.dart';
+import 'package:flutter_todo/components/comp1container.dart';
+import 'package:flutter_todo/components/dialog_1.dart';
 
 void main() {
   runApp(const TodoFile());

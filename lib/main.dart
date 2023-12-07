@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_project/pages/todo_file.dart';
+import 'package:flutter_todo/pages/todo_file.dart';
 
 void main() {
   runApp(const MyApp());
