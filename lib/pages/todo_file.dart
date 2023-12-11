@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/components/comp1container.dart';
 import 'package:flutter_todo/components/dialog_1.dart';
+import 'package:flutter_todo/data/database.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+void showNotification(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.TOP,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Colors.grey,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}
 
 void main() {
   runApp(const TodoFile());
@@ -14,31 +29,65 @@ class TodoFile extends StatefulWidget {
 }
 
 class _TodoFileState extends State<TodoFile> {
-  List taskNamesList = [
-    ["Flutter Project1..", false],
-    ["Flutter Project2..", false],
-    ["Flutter Project3..", false],
-    ["Flutter Project4..", false],
-    ["Flutter Project5..", false],
-  ];
+  final myContainer = Hive.box("mybox");
+
+  final myController = TextEditingController();
+  TododDatabase todo = TododDatabase();
+
+  void onSaveTodo() {
+    if (myController.text == "") {
+      showNotification("Please enter the task...");
+    } else {
+      setState(() {
+        todo.taskNamesList.add([myController.text, false]);
+      });
+      Navigator.pop(context);
+      myController.text = "";
+    }
+  }
 
   void createNewTask() {
     showDialog(
       context: context,
       builder: (context) {
-        return const Dialog1();
+        return Dialog1(
+          controller: myController,
+          onSave: onSaveTodo,
+          onClose: () {
+            Navigator.pop(context);
+          },
+        );
       },
     );
   }
 
   void checkBoxFunction(bool? value, int index) {
     setState(() {
-      taskNamesList[index][1] = !taskNamesList[index][1];
+      todo.taskNamesList[index][1] = !todo.taskNamesList[index][1];
+    });
+  }
+
+  void deleteFunction(int index) {
+    setState(() {
+      todo.taskNamesList.removeAt(index);
     });
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    if (myContainer.get("ToDoList") == null) {
+      todo.initialView();
+    } else {
+      todo.updateDatabase();
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    debugPrint(todo.taskNamesList.length.toString());
+
     return Scaffold(
       backgroundColor: Colors.purple[100],
 
@@ -77,12 +126,15 @@ class _TodoFileState extends State<TodoFile> {
 
       // Body....
       body: ListView.builder(
-        itemCount: taskNamesList.length,
+        itemCount: todo.taskNamesList.length,
         itemBuilder: (context, index) {
           return (Comp1(
-            taskName: taskNamesList[index][0],
-            taskCompleted: taskNamesList[index][1],
+            taskName: todo.taskNamesList[index][0],
+            taskCompleted: todo.taskNamesList[index][1],
             onChanged: (value) => checkBoxFunction(value, index),
+            deleteTodo: (p0) {
+              deleteFunction(index);
+            },
           ));
         },
       ),
