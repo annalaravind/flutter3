@@ -17,11 +17,13 @@ class DialogButton extends StatelessWidget {
       ),
       child: MaterialButton(
         onPressed: onPressed,
-        color: Colors.purple[400],
+        color: const Color.fromARGB(255, 17, 66, 95),
         child: Text(
           text,
-          style:
-              const TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
+          style: const TextStyle(
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
+          ),
         ),
       ),
     );

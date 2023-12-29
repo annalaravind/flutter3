@@ -19,7 +19,7 @@ class Dialog1 extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
-      backgroundColor: Colors.purple[300],
+      backgroundColor: const Color.fromARGB(255, 29, 74, 100),
       shadowColor: Colors.black,
       elevation: 5,
       content: SizedBox(
@@ -44,6 +44,9 @@ class Dialog1 extends StatelessWidget {
                   ),
                 ),
                 hintText: "Add a new task..",
+                hintStyle: TextStyle(
+                  color: Colors.white,
+                ),
               ),
               style: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.w700),

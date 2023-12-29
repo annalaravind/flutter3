@@ -30,15 +30,13 @@ class Comp1 extends StatelessWidget {
               backgroundColor: Colors.red,
               icon: Icons.delete,
               label: "Delete",
-              borderRadius: BorderRadius.circular(10),
             ),
           ],
         ),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          decoration: BoxDecoration(
-            color: Colors.purple[200],
-            borderRadius: BorderRadius.circular(10),
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 17, 66, 95),
           ),
           height: 70,
           child: Row(
@@ -58,10 +56,11 @@ class Comp1 extends StatelessWidget {
                 child: Text(
                   taskName,
                   style: TextStyle(
+                    color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    decoration: taskCompleted
+                    decoration: (taskCompleted
                         ? TextDecoration.lineThrough
-                        : TextDecoration.none,
+                        : TextDecoration.none),
                   ),
                 ),
               ),

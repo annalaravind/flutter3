@@ -75,32 +75,34 @@ class _TodoFileState extends State<TodoFile> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     if (myContainer.get("ToDoList") == null) {
       todo.initialView();
     } else {
       todo.updateDatabase();
     }
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(todo.taskNamesList.length.toString());
-
     return Scaffold(
-      backgroundColor: Colors.purple[100],
+      backgroundColor: const Color.fromARGB(255, 21, 81, 116),
 
       // Drawer....
       drawer: Drawer(
-        elevation: 16.0,
-        backgroundColor: Colors.purple[100],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0.0),
+        ),
+        backgroundColor: const Color.fromARGB(255, 21, 81, 116),
         child: const Column(
           children: [
             DrawerHeader(
               child: Text(
                 "This is Drawer Header..",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
               ),
             )
           ],
@@ -109,14 +111,12 @@ class _TodoFileState extends State<TodoFile> {
 
       // App bar....
       appBar: AppBar(
-        backgroundColor: Colors.purple[300],
-        toolbarHeight: 90,
+        backgroundColor: const Color.fromARGB(255, 0, 67, 105),
+        toolbarHeight: 70,
         centerTitle: true,
-        shadowColor: Colors.black,
-        elevation: 5,
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          "..TO DO..",
+          "Todo List",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w900,
@@ -143,7 +143,7 @@ class _TodoFileState extends State<TodoFile> {
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
         shape: const CircleBorder(),
-        backgroundColor: Colors.purple[400],
+        backgroundColor: const Color.fromARGB(255, 17, 62, 88),
         child: const Icon(
           Icons.add,
           color: Colors.white,

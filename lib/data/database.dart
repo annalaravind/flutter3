@@ -7,8 +7,8 @@ class TododDatabase {
   // Initial view....
   void initialView() {
     taskNamesList = [
-      ["Flutter Project 1..", false],
-      ["Flutter Project 2..", false]
+      ["Flutter Project 1", false],
+      ["Flutter Project 2", false]
     ];
   }
 
